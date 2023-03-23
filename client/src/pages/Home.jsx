@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from "styled-components";
-import Navbar from '../Components/Navbar';
 
 const Container = styled.div`
     display: flex;
@@ -12,8 +11,7 @@ const Container = styled.div`
 const Home = () => {
   return (
     <Container>
-        <Navbar></Navbar>
-        
+      
     </Container>
   )
 }
