@@ -1,25 +1,50 @@
-import React from 'react'
-import styled from 'styled-components'
-import VideocamIcon from '@mui/icons-material/Videocam';
+import React from "react";
+import styled from "styled-components";
+// import VideocamIcon from "@mui/icons-material/Videocam";
 
 const Container = styled.div`
-    display: flex;
-`
+  display: flex;
+`;
 
 const Wrapper = styled.div`
-    padding: 10px 10px;
-    margin-left: 20%;
-`
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 10px;
+  margin-left: 20%;
+`;
 
-const Card = () => {
+const Details = styled.div`
+  display: flex;
+  gap: 12px;
+  flex: 1;
+`;
+
+const Image = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+  cursor: pointer;
+`;
+
+const Text = styled.div`
+  font-size: 20px;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
+const Card = ({details}) => {
   return (
     <Container>
-        <Wrapper>
-            <VideocamIcon style={{color: 'blue', border:"1px solid lightgray", padding: "10px" }}/>
-            CARD
-        </Wrapper>
+      <Wrapper>
+        <Details>
+          <Image src="videocam.jpg" alt="Image.png" />
+          <Text>{details}</Text>
+        </Details>
+      </Wrapper>
     </Container>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

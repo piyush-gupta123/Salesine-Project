@@ -92,7 +92,7 @@ const SignIn = () => {
     <Container>
       <Wrapper>
         <Title>Login</Title>
-        <SubTitle>To Contine</SubTitle>
+        <SubTitle>To Contine WeMeet</SubTitle>
         <Input
           placeholder="UserName"
           onChange={(e) => setName(e.target.value)}

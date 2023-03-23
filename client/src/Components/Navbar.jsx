@@ -25,6 +25,7 @@ const Wrapper = styled.div`
 const Heading = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
   color: white;
   font-size: 20px;
@@ -32,6 +33,7 @@ const Heading = styled.div`
   margin-left: 1%;
   margin-right: 1%;
   cursor: pointer;
+  padding: 0px 5px;
   &:hover {
     display: inline-block;
     position: relative;
@@ -72,7 +74,7 @@ const Input = styled.input`
 
 const ButtonDiv = styled.div`
   display: flex;
-  margin-left: 800px;
+  margin-left: 650px;
   margin-right: 20px;
 `;
 const Button = styled.button`
@@ -84,10 +86,10 @@ const Button = styled.button`
   border: none;
   color: white;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   margin-top: 10px;
   cursor: pointer;
-  gap: 5px;
+  gap: 10px;
   position: sticky;
   &:hover {
     display: inline-block;
@@ -99,14 +101,27 @@ const Button = styled.button`
   }
 `;
 
+const Logo = styled.img`
+  width: 60px;
+  height: 60px;
+  padding: 0px 10px;
+  border-radius: 30px;
+  cursor: pointer;
+`
+
 const Navbar = () => {
   return (
     <Container>
       <Wrapper>
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <Logo src="logomain.png" alt="Logo"/>
+        </Link>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <Heading>Home</Heading>
         </Link>
-        <Heading>Calls</Heading>
+        <Link to="/calls" style={{ textDecoration: "none", color: "inherit" }}>
+          <Heading>Calls</Heading>
+        </Link>
         <Heading>Deals</Heading>
         <Heading>Teams</Heading>
         <Heading>Activity</Heading>

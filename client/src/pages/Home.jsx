@@ -25,14 +25,16 @@ const Wrapper = styled.div`
 
 const ButtonDiv = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
-  margin-top: 40%;
+  margin-top: 15%;
 `;
 
 const Button = styled.button`
   display: flex;
   align-items: center;
+  width: 100%;
   justify-content: center;
   color: black;
   background: skyblue;
@@ -43,10 +45,19 @@ const Button = styled.button`
   margin: 20px 0px;
 `;
 
+const Heading = styled.h1`
+  font-size: 50px;
+  font-family: Roboto,sans-serif;
+  font-weight: 500;
+  color: black;
+  text-decoration: underline;
+`
+
 const Home = () => {
   return (
     <Container>
       <Wrapper>
+        <Heading>WE MEET</Heading>
         <ButtonDiv>
           <Button>New Meeting</Button>
           <Button>Join Meeting</Button>

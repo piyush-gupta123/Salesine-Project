@@ -86,7 +86,7 @@ const SignUp = () => {
     <Container>
       <Wrapper>
         <Title>Sign Up</Title>
-        <SubTitle>To Continue</SubTitle>
+        <SubTitle>To Continue WeMeet</SubTitle>
         <Input placeholder="Name" onChange={(e) => setName(e.target.value)} />
         <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
         <Input
