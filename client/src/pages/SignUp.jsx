@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { loginFailure, loginStart, loginSuccess } from "../redux/userSlice";
+import axios from "axios"
 
 const Container = styled.div`
   display: flex;
-  margin-top: 5%;
+  margin-top: 4%;
   margin-left: 10%;
   align-items: center;
   flex-direction: column;
@@ -22,7 +20,7 @@ const Wrapper = styled.div`
   background-color: white;
   border: 1px solid gray;
   border-radius: 30px;
-  padding: 50px 70px;
+  padding: 50px 80px;
   gap: 10px;
 `;
 
@@ -35,9 +33,9 @@ const Title = styled.h1`
 
 const SubTitle = styled.h2`
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 300;
   color: black;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 `;
 
 const Input = styled.input`
@@ -48,7 +46,7 @@ const Input = styled.input`
   margin: 5px 0px;
   width: 100%;
   color: black;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `;
 
 const Button = styled.button`
@@ -62,28 +60,24 @@ const Button = styled.button`
 `;
 
 
-const SignIn = () => {
+const SignUp = () => {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
 
-  const handleLogin = async (e) => {
+
+  const handleSignIn = async (e) => {
     e.preventDefault();
-    dispatch(loginStart());
     try {
       const res = await axios
-        .post(
-          "http://localhost:5000/auth/login",
-          {
-            name: name,
-            password: password,
-          },
-        )
+        .post("http://localhost:5000/auth/signup", {
+          name: name,
+          email: email,
+          password: password,
+        })
         .catch((err) => console.log(err));
       console.log(res);
-      dispatch(loginSuccess());
     } catch (err) {
-      dispatch(loginFailure());
       console.log(err);
     }
   };
@@ -91,21 +85,19 @@ const SignIn = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>Login</Title>
-        <SubTitle>To Contine</SubTitle>
-        <Input
-          placeholder="UserName"
-          onChange={(e) => setName(e.target.value)}
-        />
+        <Title>Sign Up</Title>
+        <SubTitle>To Continue</SubTitle>
+        <Input placeholder="Name" onChange={(e) => setName(e.target.value)} />
+        <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
         <Input
           placeholder="Password"
-          type="password"
+          type= "password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button onClick={handleLogin}>Login</Button>
+        <Button onClick={handleSignIn}>Sign Up</Button>
       </Wrapper>
     </Container>
   );
 };
 
-export default SignIn;
+export default SignUp;

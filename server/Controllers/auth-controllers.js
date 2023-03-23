@@ -1,5 +1,6 @@
 import User from "../Models/user_model.js";
 import bcrypt from "bcryptjs";
+import { createError } from "../error.js";
 
 export const signUp = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -26,14 +27,15 @@ export const signUp = async (req, res, next) => {
 
     return res.status(200).json({ newUser });
   } catch (err) {
-    next(err);
+    next(createError(400,"Something Went Wrong!!"));
   }
 };
 
 export const login = async (req, res, next) => {
-  const { name } = req.body;
+  const { name, password } = req.body;
   try {
-    if (!name || !req.body.password) {
+    console.log(name,password)
+    if (!name || !password) {
       return res.status(404).json({ Message: "Please Enter the credentials" });
     }
 
@@ -43,18 +45,14 @@ export const login = async (req, res, next) => {
       return res.status(404).json({ Message: "User Not Found" });
     }
 
-    const confirmPassword = bcrypt.compareSync(
-      req.body.password,
-      user.password
-    );
+    const confirmPass = bcrypt.compareSync(password,user.password)
 
-    if (!confirmPassword) {
+    if (!confirmPass) {
       return res.status(403).json({ Message: "Invalid Credentials" });
     }
 
-    const { password, ...others } = user._doc;
 
-    return res.status(200).json(others);
+    res.status(200).json({Message: "Login Success"});
   } catch (err) {
     next(err);
   }

@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  position: absolute;
+  position: sticky;
   width: 100%;
   top: 0;
   background-color: #0047ab;
@@ -102,7 +103,9 @@ const Navbar = () => {
   return (
     <Container>
       <Wrapper>
-        <Heading>Home</Heading>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Heading>Home</Heading>
+        </Link>
         <Heading>Calls</Heading>
         <Heading>Deals</Heading>
         <Heading>Teams</Heading>
@@ -110,11 +113,18 @@ const Navbar = () => {
         <Heading>Library</Heading>
         <Search>
           <Input placeholder="Search" />
-          <SearchIcon/>
+          <SearchIcon />
         </Search>
         <ButtonDiv>
-          <Button>Sign Up</Button>
-          <Button>Login</Button>
+          <Link
+            to="signup"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <Button>Sign Up</Button>
+          </Link>
+          <Link to="login" style={{ textDecoration: "none", color: "inherit" }}>
+            <Button>Login</Button>
+          </Link>
         </ButtonDiv>
       </Wrapper>
     </Container>
