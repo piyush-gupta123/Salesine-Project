@@ -10,6 +10,7 @@ const Container = styled.div`
   position: sticky;
   margin-top: 5%;
   margin-left: 40%;
+  box-shadow: 15px 15px 5px #ccc;
 `;
 
 const Wrapper = styled.div`
