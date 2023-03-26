@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -59,12 +60,19 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const Label = styled.text`
+  font-size: 15px;
+  font-weight: 300;
+  color: red;
+`;
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [errors, setErrors] = useState("");
+  const [isSignIn, setIsSignIn] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -75,12 +83,21 @@ const SignUp = () => {
           email: email,
           password: password,
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setErrors(err.response.data.Message);
+          console.log(err);
+        });
       console.log(res);
+      setIsSignIn(true);
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
   };
+
+  // const handleLogout = (e) =>{
+  //   setIsSignIn(false);
+  // }
 
   return (
     <Container>
@@ -88,13 +105,22 @@ const SignUp = () => {
         <Title>Sign Up</Title>
         <SubTitle>To Continue WeMeet</SubTitle>
         <Input placeholder="Name" onChange={(e) => setName(e.target.value)} />
-        <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+        <Input
+          placeholder="Email"
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <Input
           placeholder="Password"
-          type= "password"
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button onClick={handleSignIn}>Sign Up</Button>
+        {errors.length > 0 ? <Label>{errors}</Label> : ""}
+        {isSignIn ? (
+          ""
+        ) : (
+          <Button onClick={handleSignIn}>Sign Up</Button>
+        )}
       </Wrapper>
     </Container>
   );

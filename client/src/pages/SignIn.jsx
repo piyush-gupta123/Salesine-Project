@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { loginFailure, loginStart, loginSuccess } from "../redux/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -61,32 +62,46 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const Label = styled.text`
+  font-size: 15px;
+  font-weight: 300;
+  color: red;
+`;
 
 const SignIn = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState("");
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(loginStart());
     try {
       const res = await axios
-        .post(
-          "http://localhost:5000/auth/login",
-          {
-            name: name,
-            password: password,
-          },
-        )
-        .catch((err) => console.log(err));
+        .post("http://localhost:5000/auth/login", {
+          name: name,
+          password: password,
+        })
+        .catch((err) => {
+          setErrors(err.response.data.Message);
+          console.log(err);
+        });
       console.log(res);
       dispatch(loginSuccess());
+      setIsSignedIn(true);
+      navigate('/');
     } catch (err) {
       dispatch(loginFailure());
       console.log(err);
     }
   };
+
+  const handleLogout = (e)=>{
+    setIsSignedIn(false);
+  }
 
   return (
     <Container>
@@ -102,7 +117,8 @@ const SignIn = () => {
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button onClick={handleLogin}>Login</Button>
+        {errors.length > 0 ? <Label>{errors}</Label> : ""}
+        {isSignedIn?<Button onClick={handleLogout}>Logout</Button>:<Button onClick={handleLogin}>Login</Button>}
       </Wrapper>
     </Container>
   );
